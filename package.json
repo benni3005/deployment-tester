@@ -1,0 +1,28 @@
+{
+  "name": "page-checker",
+  "version": "0.0.1",
+  "description": "Tool for checking pages of websites for simple things like certain texts or selectors.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benni3005/page-checker.git"
+  },
+  "keywords": [
+    "automated",
+    "tests"
+  ],
+  "author": "Benjamin Hofmann",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/benni3005/page-checker/issues"
+  },
+  "homepage": "https://github.com/benni3005/page-checker#readme",
+  "dependencies": {
+    "chalk": "^2.1.0",
+    "request": "^2.82.0",
+    "request-promise-native": "^1.0.4"
+  }
+}

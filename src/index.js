@@ -14,7 +14,7 @@ const uris = [
 
 uris.forEach((uri) => {
 
-  let options = {
+  const options = {
     method: 'GET',
     uri: uri,
     resolveWithFullResponse: true,

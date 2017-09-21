@@ -6,9 +6,9 @@ In the end it should become a small, but powerful library for checking pages of 
 
 * HTTP status code
 * Response time
+* Content type
 * Matching selectors
 * Matching strings
-* Sent XHR request
 * …
 
 Its main purpose for myself will be to use it in an automated deployment pipeline. When certain things after a

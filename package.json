@@ -2,8 +2,9 @@
   "name": "page-checker",
   "version": "0.0.1",
   "description": "Tool for checking pages of websites for simple things like certain texts or selectors.",
-  "main": "src/index.js",
+  "main": "dist/page-checker.js",
   "scripts": {
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,5 +25,11 @@
     "chalk": "^2.1.0",
     "request": "^2.82.0",
     "request-promise-native": "^1.0.4"
+  },
+  "devDependencies": {
+    "@types/chalk": "^0.4.31",
+    "@types/request": "^2.0.3",
+    "@types/request-promise-native": "^1.0.6",
+    "typescript": "^2.5.2"
   }
 }

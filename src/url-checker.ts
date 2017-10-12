@@ -1,40 +1,14 @@
 import * as chalk from "chalk";
 import * as request from "request-promise-native";
+import ElapsedTimeCheck from "./check/ElapsedTimeCheck";
+import ICheck from "./check/ICheck";
+import StatusCodeCheck from "./check/StatusCodeCheck";
+import IHttpResponse from "./http/IHttpResponse";
 
-interface IResponse {
-  readonly statusCode: number;
-  readonly elapsedTime: number;
-}
-
-function coloredStatusPrefix(response: IResponse): string {
-  if (response.statusCode >= 200 && response.statusCode < 300) {
-    return chalk.bgGreen.white(" + ");
-  }
-  return chalk.bgRed.white(" - ");
-}
-
-function coloredStatusCode(response: IResponse): string {
-  if (response.statusCode >= 200 && response.statusCode < 300) {
-    return chalk.bold.green(response.statusCode.toString());
-  }
-  return chalk.bold.red(response.statusCode.toString());
-}
-
-function coloredResponseTime(response: IResponse): string {
-  if (response.elapsedTime < 200) {
-    return chalk.bold.green(response.elapsedTime.toString());
-  }
-  return chalk.bold.red(response.elapsedTime.toString());
-}
-
-function log(uri: string, response: IResponse) {
-  const dim = chalk.dim("::");
-  const statusPrefix = coloredStatusPrefix(response);
-  const statusCode = coloredStatusCode(response);
-  const responseTime = coloredResponseTime(response);
-
-  console.log(`${statusPrefix} ${uri} ${dim} Status ${statusCode} ${dim} ${responseTime} ms taken`);
-}
+const checks: ICheck[] = [
+  new ElapsedTimeCheck(),
+  new StatusCodeCheck(),
+];
 
 const uris: string[] = [
   "https://www.google.com/",
@@ -46,9 +20,18 @@ const uris: string[] = [
   "https://www.gitignore.io/api/phpstorm%2Cnetbeans",
 ];
 
+function checkResponse(uri: string, response: IHttpResponse) {
+  console.log(chalk.bold(uri));
+
+  checks.forEach((check) => {
+    check.check(response);
+  });
+}
+
 uris.forEach((uri) => {
 
   const options = {
+    followRedirect: false,
     method: "GET",
     resolveWithFullResponse: true,
     time: true,
@@ -57,9 +40,9 @@ uris.forEach((uri) => {
 
   request(options)
     .then((response) => {
-      log(uri, response);
+      checkResponse(uri, response);
     })
     .catch((error) => {
-      log(uri, error.response);
+      checkResponse(uri, error.response);
     });
 });

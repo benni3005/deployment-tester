@@ -1,10 +1,10 @@
-# Page Checker
+# URL Checker
 
 **This is under development and some kind of testing stage for experimenting with Node. Don't use it right now!**
 
 ## Ideas
 
-In the end it should become a small, but powerful library for checking pages of a website for certain things like:
+In the end it should become a small, but powerful library for checking URLs for certain things like:
 
 * HTTP status code
 * Response time

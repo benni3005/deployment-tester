@@ -6,6 +6,6 @@
     "outDir": "dist"
   },
   "files": [
-    "src/page-checker.ts"
+    "src/url-checker.ts"
   ]
 }

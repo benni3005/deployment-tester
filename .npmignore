@@ -1,5 +1,6 @@
 *.log
 *.lock
+.editorconfig
 .idea
 node_modules
 src

@@ -2,11 +2,7 @@
   "name": "url-checker",
   "version": "0.0.1",
   "description": "Tool for checking URLs for simple things like certain texts or selectors.",
-  "main": "dist/url-checker.js",
-  "scripts": {
-    "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "main": "release/js/url-checker.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/benni3005/page-checker.git"
@@ -30,6 +26,12 @@
     "@types/chalk": "^0.4.31",
     "@types/request": "^2.0.3",
     "@types/request-promise-native": "^1.0.6",
-    "typescript": "^2.5.2"
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-tslint": "^8.1.2",
+    "gulp-typescript": "^3.2.2",
+    "merge2": "^1.2.0",
+    "tslint": "^5.7.0",
+    "typescript": "^2.5.3"
   }
 }

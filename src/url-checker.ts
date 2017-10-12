@@ -1,54 +1,65 @@
-import * as chalk from 'chalk';
-import * as request from 'request-promise-native';
+import * as chalk from "chalk";
+import * as request from "request-promise-native";
 
-interface iResponse {
+interface IResponse {
   readonly statusCode: number;
   readonly elapsedTime: number;
 }
 
-function coloredStatusPrefix(response: iResponse): string {
-  return (response.statusCode >= 200 && response.statusCode < 300) ? chalk.bgGreen.white(' + ') : chalk.bgRed.white(' - ');
+function coloredStatusPrefix(response: IResponse): string {
+  if (response.statusCode >= 200 && response.statusCode < 300) {
+    return chalk.bgGreen.white(" + ");
+  }
+  return chalk.bgRed.white(" - ");
 }
 
-function coloredStatusCode(response: iResponse): string {
-  return (response.statusCode >= 200 && response.statusCode < 300) ? chalk.bold.green(response.statusCode.toString()) : chalk.bold.red(response.statusCode.toString());
+function coloredStatusCode(response: IResponse): string {
+  if (response.statusCode >= 200 && response.statusCode < 300) {
+    return chalk.bold.green(response.statusCode.toString());
+  }
+  return chalk.bold.red(response.statusCode.toString());
 }
 
-function coloredResponseTime(response: iResponse): string {
-  return (response.elapsedTime <= 200) ? chalk.bold.green(response.elapsedTime.toString()) : chalk.bold.red(response.elapsedTime.toString());
+function coloredResponseTime(response: IResponse): string {
+  if (response.elapsedTime < 200) {
+    return chalk.bold.green(response.elapsedTime.toString());
+  }
+  return chalk.bold.red(response.elapsedTime.toString());
 }
 
-function log(uri: string, response: iResponse) {
+function log(uri: string, response: IResponse) {
+  const dim = chalk.dim("::");
   const statusPrefix = coloredStatusPrefix(response);
   const statusCode = coloredStatusCode(response);
   const responseTime = coloredResponseTime(response);
 
-  console.log(`${statusPrefix} ${uri} ${chalk.dim('::')} Status ${statusCode} ${chalk.dim('::')} ${responseTime} ms taken`);
+  console.log(`${statusPrefix} ${uri} ${dim} Status ${statusCode} ${dim} ${responseTime} ms taken`);
 }
 
 const uris: string[] = [
-  'https://www.google.com/',
-  'https://www.npmjs.com/',
-  'https://github.com/',
-  'https://code2flow.com/app',
-  'https://www.myinstants.com/',
-  'https://stackoverflow.com/bfesb<y'
+  "https://www.google.com/",
+  "https://www.npmjs.com/",
+  "https://github.com/",
+  "https://code2flow.com/app",
+  "https://www.myinstants.com/",
+  "https://stackoverflow.com/bfesb<y",
+  "https://www.gitignore.io/api/phpstorm%2Cnetbeans",
 ];
 
-uris.forEach(uri => {
+uris.forEach((uri) => {
 
   const options = {
-    method: 'GET',
-    uri: uri,
+    method: "GET",
     resolveWithFullResponse: true,
-    time: true
+    time: true,
+    uri,
   };
 
   request(options)
-    .then(response => {
+    .then((response) => {
       log(uri, response);
     })
-    .catch(error => {
+    .catch((error) => {
       log(uri, error.response);
     });
 });
